@@ -1,0 +1,10 @@
+################################################################################
+#  Set the path to the top level of the application directory.                 #
+################################################################################
+
+Path_to_tests = /path/to/your/tests
+
+Test = osu_microbenchmarks test_startup_2n
+Test = osu_microbenchmarks test_one_sided_2n
+Test = osu_microbenchmarks test_pt2pt_2n
+Test = osu_microbenchmarks test_coll_2n

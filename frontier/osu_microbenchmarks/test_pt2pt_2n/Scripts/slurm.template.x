@@ -1,0 +1,1 @@
+../../Source/Common_Scripts/slurm.template.x.get_local_rank

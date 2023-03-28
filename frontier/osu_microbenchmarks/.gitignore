@@ -1,0 +1,4 @@
+*.o
+test_*/Status
+test_*/Run_Archive
+test_*/Scripts/.kill_test

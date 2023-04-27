@@ -1,0 +1,40 @@
+
+variable       steps index 100
+
+units          real
+atom_style     full
+boundary       p p p
+
+# from http://www.orsi.sems.qmul.ac.uk/downloads/forcefield.TIP3P-Ew
+
+pair_style          lj/cut/coul/long 13.0
+pair_modify         tail no
+bond_style          harmonic
+angle_style         harmonic
+
+kspace_style        pppm 1.0e-5
+
+read_data           tip3p.data
+
+replicate ${x} ${y} ${z} bbox
+
+neighbor          3.0 bin
+neigh_modify      delay 0 every 1 one 10000 page 100000
+
+variable          mytemp equal 310.15
+velocity          all create ${mytemp} 12345 loop local
+
+thermo            100
+thermo_style      custom step temp pe press evdwl ecoul vol
+thermo_modify     norm yes
+
+timestep          0.1
+
+fix 1 all shake 1e-5 20 50 b 1 a 1
+fix 2 all npt temp ${mytemp} ${mytemp} 100 iso 1.0 1.0 100
+
+run               ${steps}
+
+unfix 1
+unfix 2
+

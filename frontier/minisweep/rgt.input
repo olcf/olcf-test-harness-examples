@@ -1,0 +1,17 @@
+################################################################################
+#  Set the path to the top level of the application directory.                 #
+################################################################################
+
+Path_to_tests = /path/to/tests
+
+#------------------------------------------------------------------------------
+# minisweep
+#------------------------------------------------------------------------------
+
+Test = minisweep hip_n0001
+Test = minisweep hip_mpi_n0002
+Test = minisweep hip_mpi_rpn4_n0002
+Test = minisweep hip_mpi_rpn8_n0002
+Test = minisweep hip_mpi_rpn8_n0002_perf
+Test = minisweep hip_mpi_rpn8_n0002_perf_long
+

@@ -1,0 +1,36 @@
+
+variable       steps index 100
+
+units          real
+atom_style     full
+boundary       p p p
+
+pair_style         lj/class2/coul/long  12.0 15.0
+bond_style         class2
+angle_style        class2
+dihedral_style     class2
+improper_style     class2
+
+kspace_style   pppm 1e-05
+
+read_data      xl6.data
+
+replicate      ${x} ${y} ${z} 
+
+neighbor       3.0 bin
+neigh_modify   delay 0 every 1 one 10000 page 100000
+
+timestep       0.1
+
+variable       mytemp equal 310.15
+velocity       all create ${mytemp} 12345 loop local
+
+thermo         100
+thermo_style      custom step temp pe press evdwl ecoul vol
+thermo_modify     norm yes
+
+fix 1 all npt temp ${mytemp} ${mytemp} 100 iso 1.0 1.0 100
+
+run            ${steps}
+
+unfix          1

@@ -1,0 +1,26 @@
+# Environment variables that can be set to control the test environment:
+#       RGT_PRG_ENV: sets the PrgEnv to load - ex: RGT_PRG_ENV="PrgEnv-cray"
+#       RGT_ROCM_VERSION: sets the version of the `rocm` or `amd` module to load
+#       RGT_MPICH_VERSION: sets the version of the `cray-mpich` module to load
+#       RGT_CCE_VERSION: sets the version of the `cce` module to load
+#       RGT_GCC_VERSION: sets the version of the `gcc` module to load
+#           Ex: RGT_ROCM_VERSION="5.1.0"
+#       USE_MY_LAMMPS: bypass the LAMMPS clone and build process, and copy
+#           the binary only from another location
+
+# Environment variables that can be used to control the tests:
+#       RGT_SUBMIT_ARGS - all jobs weak scale and respect $SLURM_NNODES, so adding `RGT_SUBMIT_ARGS="-N 64" will scale any of these tests out
+#                           This shouldn't be used to do this with the metrics being sent to Grafana
+#       LAMMPS_ATOMS_PER_TASK - you can change the atoms per task using this environment variable. All tests respect this variable.
+#                           Ex: LAMMPS_ATOMS_PER_TASK=5000000 will assign approximately 5 million atoms to each test
+#                           Again, caution. This will mess with Grafana metrics
+
+Path_to_tests =  /path/to/tests
+
+Test = lammps test_1node_4mil_class2
+Test = lammps test_1node_4mil_reax
+Test = lammps test_8node_4mil_class2
+Test = lammps test_8node_4mil_reax
+Test = lammps test_correctness_reax_8node_4mil
+Test = lammps test_nodecheck_reax
+Test = lammps test_nodecheck_reax_thermo1_step10000

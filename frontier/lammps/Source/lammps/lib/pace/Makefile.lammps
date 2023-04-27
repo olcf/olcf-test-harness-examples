@@ -1,3 +1,0 @@
-pace_SYSINC =-I../../lib/pace/src/ML-PACE -I../../lib/pace/src/yaml-cpp/include
-pace_SYSLIB = -L../../lib/pace/ -lpace -L../../lib/pace/src/yaml-cpp/ -lyaml-cpp
-pace_SYSPATH =

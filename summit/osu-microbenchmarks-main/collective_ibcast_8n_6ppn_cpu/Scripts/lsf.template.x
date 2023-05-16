@@ -1,0 +1,1 @@
+../../Source/Common_Scripts/lsf.template.collectives.singlecode

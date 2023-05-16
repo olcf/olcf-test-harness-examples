@@ -1,0 +1,88 @@
+#!/bin/bash -l
+#BSUB -nnodes __nodes__
+#BSUB -W __walltime__
+#BSUB -J __job_name__
+
+nnodes=__nodes__
+
+# Define environment variables needed
+EXE_PATH="__executable_path__"
+SCRIPTS_DIR="__scripts_dir__"
+WORK_DIR="__working_dir__"
+RESULTS_DIR="__results_dir__"
+HARNESS_ID="__harness_id__"
+BUILD_DIR="__build_dir__"
+
+TEST_NAME=$(basename $(dirname $SCRIPTS_DIR))
+# Format: <codeclass>_<codename>_<nnodes>_<ppn>_<gpu/cpu>
+code_class=$(echo $TEST_NAME | cut -d'_' -f1)
+code_name=$(echo $TEST_NAME | cut -d'_' -f2 | sed -e 's|-|_|g')
+ppn=$(echo $TEST_NAME | cut -d'_' -f4 | sed -e 's|ppn||')
+buffer_type=$(echo $TEST_NAME | cut -d'_' -f5)
+
+nranks=$(expr ${nnodes} \* ${ppn})
+if [ "$buffer_type" == "gpu" ]; then exe_flags="-d cuda"; fi
+
+echo "Test parameter summary:"
+echo -e "\tTEST_NAME=${TEST_NAME}"
+echo -e "\tcode_class=${code_class}"
+echo -e "\tcode_name=${code_name}"
+echo -e "\tnnodes=${nnodes}"
+echo -e "\tppn=${ppn}"
+echo -e "\tbuffer_type=${buffer_type}"
+
+source ${BUILD_DIR}/Common_Scripts/setup_env.sh
+
+module -t list
+
+echo "Printing test directory environment variables:"
+env | fgrep RGT_APP_SOURCE_
+env | fgrep RGT_TEST_
+echo
+
+# Ensure we are in the starting directory
+cd $SCRIPTS_DIR
+
+# Make the working scratch space directory.
+if [ ! -e $WORK_DIR ]
+then
+    mkdir -p $WORK_DIR
+fi
+
+# Change directory to the working directory.
+cd $WORK_DIR
+
+env &> job.environ
+#scontrol show hostnames > job.nodes
+
+# Run the executable.
+log_binary_execution_time.py --scriptsdir $SCRIPTS_DIR --uniqueid $HARNESS_ID --mode start
+
+set +x
+jsrun --smpiargs="-gpu" --rs_per_host=${ppn} -n ${nranks} --cpu_per_rs=1 --tasks_per_rs=1 --gpu_per_rs=1 \
+    $BUILD_DIR/get_local_rank $BUILD_DIR/$EXE_PATH/${code_class}/osu_${code_name} $exe_flags \
+    2>&1 | tee osu_${code_name}.out
+set -x
+
+# To get picked up by harness and sent to Grafana
+ln osu_${code_name}.out stdout.txt
+
+log_binary_execution_time.py --scriptsdir $SCRIPTS_DIR --uniqueid $HARNESS_ID --mode final
+
+# Ensure we return to the starting directory.
+cd $SCRIPTS_DIR
+
+# Copy the output and results back to the $RESULTS_DIR
+cp -rf $WORK_DIR/* $RESULTS_DIR 
+
+# Check the final results.
+check_executable_driver.py -p $RESULTS_DIR -i $HARNESS_ID
+
+# Resubmit if needed
+case __resubmit__ in
+    0) 
+       echo "No resubmit";;
+    1) 
+       test_harness_driver.py -r;;
+esac 
+

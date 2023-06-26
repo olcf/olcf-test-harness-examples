@@ -546,6 +546,7 @@ void print_preamble_nbc (int rank)
         fprintf(stdout, "%-*s", 10, "# Size");
         fprintf(stdout, "%*s", FIELD_WIDTH, "Overall(us)");
     } else {
+        fprintf(stdout, "%-*s", 0, "#");
         fprintf(stdout, "%*s", FIELD_WIDTH, "Overall(us)");
     }
 

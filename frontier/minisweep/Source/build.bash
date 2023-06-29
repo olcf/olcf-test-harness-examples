@@ -3,6 +3,9 @@
 # Script to build minisweep.
 # 
 
+# HIP_PATH is no longer set by the module, quick fix
+export HIP_PATH=${ROCM_PATH}
+
 BUILDTYPE=$1
 echo "BUILDTYPE $BUILDTYPE"
 BUILDSCRIPT=cmake_${BUILDTYPE}.sh

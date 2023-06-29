@@ -31,6 +31,11 @@ fi
 # The version here is the latest known working version with these particular tests
 git clone -b patch_28Mar2023_update1 https://github.com/lammps/lammps.git
 
+# Copy over makefiles
+mkdir -p lammps/src/MAKE/MINE
+cp Makefile.cray_cc lammps/src/MAKE/MINE/
+cp Makefile.gfx90a lammps/src/MAKE/MINE/
+
 # to save space, remove some of the larger unneccessary dirs
 if [ -d lammps/.git ]; then
     rm -rf ./lammps/.git

@@ -1,0 +1,133 @@
+LAMMPS (3 Aug 2022)
+KOKKOS mode is enabled (../kokkos.cpp:106)
+  will use up to 1 GPU(s) per node
+Reading data file ...
+  triclinic box = (0 0 0) to (22.326 11.1412 13.778966) with tilt (0 -5.02603 0)
+  1 by 1 by 1 MPI processor grid
+  reading atoms ...
+  304 atoms
+  reading velocities ...
+  304 velocities
+  read_data CPU = 0.010 seconds
+Replicating atoms ...
+  triclinic box = (0 0 0) to (290.238 289.6712 289.35829) with tilt (0 -105.54663 0)
+  1 by 1 by 1 MPI processor grid
+  bounding box image = (0 -1 -1) to (0 1 1)
+  bounding box extra memory = 0.03 MB
+  average # of replicas added to proc = 7098.00 out of 7098 (100.00%)
+  2157792 atoms
+  replicate CPU = 0.500 seconds
+
+Info-Info-Info-Info-Info-Info-Info-Info-Info-Info-Info
+Printed on Wed Dec 28 14:12:41 2022
+
+Total time information (MPI rank 0):
+  CPU time:    0:00:00
+ Wall time:    0:00:01
+
+Info-Info-Info-Info-Info-Info-Info-Info-Info-Info-Info
+
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+Your simulation uses code contributions which should be cited:
+- pair reaxff command:
+- fix qeq/reaxff command:
+The log file lists these citations in BibTeX format.
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+Neighbor list info ...
+  update every 10 steps, delay 0 steps, check no
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 11
+  ghost atom cutoff = 11
+  binsize = 11, bins = 36 27 27
+  2 neighbor lists, perpetual/occasional/extra = 2 0 0
+  (1) pair reax/c/kk, perpetual
+      attributes: half, newton off, ghost, kokkos_device
+      pair build: half/bin/ghost/kk/device
+      stencil: full/ghost/bin/3d
+      bin: kk/device
+  (2) fix qeq/reax/kk, perpetual
+      attributes: full, newton off, kokkos_device
+      pair build: full/bin/kk/device
+      stencil: full/bin/3d
+      bin: kk/device
+Setting up Verlet run ...
+  Unit style    : real
+  Current step  : 0
+  Time step     : 0.1
+WARNING: Fixes cannot yet send exchange data in Kokkos communication, switching to classic exchange/border communication (../comm_kokkos.cpp:651)
+Per MPI rank memory allocation (min/avg/max) = 2.233e+04 | 2.233e+04 | 2.233e+04 Mbytes
+   Step          Temp          PotEng         Press          E_vdwl         E_coul         Volume    
+         0   300           -113.27833      439.01869     -111.57687     -1.7014647      24327390     
+         5   300.19541     -113.27881      581.17047     -111.57735     -1.7014578      24327390     
+        10   300.77299     -113.28046      866.15157     -111.57902     -1.7014358      24327390     
+        15   301.62318     -113.28292      1191.4403     -111.58152     -1.7013939      24327390     
+        20   302.41755     -113.28522      1767.5853     -111.58389     -1.7013258      24327390     
+        25   302.77421     -113.28622      2883.5507     -111.58499     -1.7012275      24327390     
+        30   302.53736     -113.28546      4422.1631     -111.58436     -1.7010992      24327390     
+        35   301.77063     -113.28314      5775.5931     -111.58219     -1.7009458      24327390     
+        40   300.57882     -113.27955      6516.5275     -111.57878     -1.7007749      24327390     
+        45   299.06584     -113.27502      6679.7951     -111.57443     -1.7005949      24327390     
+        50   297.39916     -113.27003      6515.9346     -111.56962     -1.7004112      24327390     
+        55   295.83806     -113.26536      6294.3962     -111.56513     -1.7002274      24327390     
+        60   294.68777     -113.2619       6203.378      -111.56186     -1.7000432      24327390     
+        65   294.21706     -113.26047      6353.6623     -111.56061     -1.6998572      24327390     
+        70   294.59388     -113.26157      6783.0565     -111.5619      -1.6996684      24327390     
+        75   295.82717     -113.26523      7418.676      -111.56575     -1.6994788      24327390     
+        80   297.709       -113.27084      8126.5116     -111.57154     -1.6992919      24327390     
+        85   299.8209      -113.27713      8762.6429     -111.57802     -1.6991149      24327390     
+        90   301.63146     -113.28252      9266.9841     -111.58357     -1.6989551      24327390     
+        95   302.64737     -113.28553      9718.8211     -111.58672     -1.6988192      24327390     
+       100   302.58442     -113.28531      10298.919     -111.5866      -1.698711       24327390     
+Loop time of 1389.71 on 1 procs for 100 steps with 2157792 atoms
+
+Performance: 0.012 ns/day, 1930.147 hours/ns, 1.439 timesteps/s
+131.0% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 706.48     | 706.48     | 706.48     |   0.0 | 50.84
+Neigh   | 68.341     | 68.341     | 68.341     |   0.0 |  4.92
+Comm    | 87.891     | 87.891     | 87.891     |   0.0 |  6.32
+Output  | 0.068293   | 0.068293   | 0.068293   |   0.0 |  0.00
+Modify  | 516.94     | 516.94     | 516.94     |   0.0 | 37.20
+Other   |            | 9.981      |            |       |  0.72
+
+Nlocal:    2.15779e+06 ave 2.15779e+06 max 2.15779e+06 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:         537479 ave      537479 max      537479 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:    5.53334e+08 ave 5.53334e+08 max 5.53334e+08 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+FullNghs:  1.06042e+09 ave 1.06042e+09 max 1.06042e+09 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 1.0604232e+09
+Ave neighs/atom = 491.43903
+Neighbor list builds = 200
+Dangerous builds not checked
+
+Info-Info-Info-Info-Info-Info-Info-Info-Info-Info-Info
+Printed on Wed Dec 28 14:36:00 2022
+
+Total time information (MPI rank 0):
+  CPU time:    0:30:28
+ Wall time:    0:23:19
+
+Info-Info-Info-Info-Info-Info-Info-Info-Info-Info-Info
+
+
+Info-Info-Info-Info-Info-Info-Info-Info-Info-Info-Info
+Printed on Wed Dec 28 14:36:00 2022
+
+Total time information (MPI rank 0):
+  CPU time:    0:30:28
+ Wall time:    0:23:19
+
+Info-Info-Info-Info-Info-Info-Info-Info-Info-Info-Info
+
+Total wall time: 0:23:19

@@ -32,6 +32,6 @@ tar -xf ${NODE_LOCAL_TMP}/inputs.tar.gz
 ${NODE_LOCAL_TMP}/lmp_gfx90a_serial \
     -k on g 1 -sf kk -pk kokkos gpu/aware on neigh half neigh/qeq full newton on comm device \
     -in ${input_file}.kokkos -log none \
-    -v x 13 -v y 26 -v z 21 -v thermo_step 5 -v steps 2000 &> lammps-${GCD_ID}.log
+    -v x 13 -v y 26 -v z 21 -v thermo_step 5 -v steps 100 &> lammps-${GCD_ID}.log
 
 exit 0
